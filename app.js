@@ -6,7 +6,7 @@ var express = require('express'),
 
 // App Configuration
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views/dist', path.join(__dirname, 'views'));
 app.set('node_modules', path.join(__dirname, 'node_modules'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));

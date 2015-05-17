@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.scss"],"names":[],"mappings":"AAEA;EACiB,kBAAA;EACb,aAAO,EAAA","file":"styles.css","sourcesContent":["@import \"var\";\r\n\r\nh1 {\r\n    font-weight: 700;\r\n    color: #000;\r\n}"],"sourceRoot":"/source/"}
