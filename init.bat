@@ -6,8 +6,6 @@ echo "Tidying up..."
 del /S /F /Q .git
 del README.md
 del init.sh
-del scss\mixins\README.md
-del scss\modules\README.md
 
 echo "Setting up your git..."
 git init

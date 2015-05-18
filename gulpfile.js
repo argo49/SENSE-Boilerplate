@@ -10,8 +10,6 @@ var minHtml    = require('gulp-minify-html');
 var imagemin   = require('gulp-imagemin');
 var nodemon    = require('gulp-nodemon');
 var pngquant   = require('imagemin-pngquant');
-var spawn      = require('child_process').spawn;
-var nodeInstance;
 
 gulp.task('default',
     ['server', 'sass', 'scripts', 'watch', 'html', 'ejs', 'images']);
@@ -34,7 +32,6 @@ gulp.task('scripts', function() {
         .pipe(uglify())
         .pipe(gulp.dest('views/dist/js'));
 });
-
 
 // Image compression
 gulp.task('images', function () {
@@ -81,10 +78,4 @@ gulp.task('watch', function() {
     gulp.watch('views/src/html/**/*.html', ['html']);
     gulp.watch('views/src/html/**/*.ejs', ['ejs']);
     gulp.watch('views/src/images/*', ['images']);
-});
-
-process.on('exit', function () {
-    if (nodeInstance) {
-        nodeInstance.kill();
-    }
 });

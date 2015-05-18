@@ -6,8 +6,6 @@ echo "Tidying up..."
 rm -rf .git
 rm README.md
 rm init.bat
-rm scss/mixins/README.md
-rm scss/modules/README.md
 
 echo "Initializing new git project..."
 git init
