@@ -8,8 +8,10 @@ var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
 var minHtml    = require('gulp-minify-html');
 var imagemin   = require('gulp-imagemin');
+var nodemon    = require('gulp-nodemon');
 var pngquant   = require('imagemin-pngquant');
-var exec       = require('child_process').exec;
+var spawn      = require('child_process').spawn;
+var nodeInstance;
 
 gulp.task('default',
     ['server', 'sass', 'scripts', 'watch', 'html', 'ejs', 'images']);
@@ -48,8 +50,8 @@ gulp.task('images', function () {
 // Pump ejs templates to the distribution folder
 // TODO: Figure out a way to minify generated templates
 gulp.task('ejs', function () {
-    return gulp.src('src/html/**/*.ejs')
-        .pipe(gulp.dest('dist'));
+    return gulp.src('views/src/html/**/*.ejs')
+        .pipe(gulp.dest('views/dist'));
 });
 
 // Minify HTML
@@ -61,11 +63,14 @@ gulp.task('html', function () {
 });
 
 // Start the node server
-gulp.task('server', function (cb) {
-  exec('npm start', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+gulp.task('server', function () {
+  nodemon({
+    script: 'app.js',
+    ext: 'js',
+    ignore: ['node_modules', 'views', 'gulpfile.js'],
+    env: { 'NODE_ENV': 'development' }
+  }).on('restart', function () {
+    console.log("Node server restarted.");
   });
 });
 
@@ -73,7 +78,13 @@ gulp.task('server', function (cb) {
 gulp.task('watch', function() {
     gulp.watch('views/src/scss/**/*.scss', ['sass']);
     gulp.watch('views/src/js/**/*.js', ['scripts']);
-    gulp.watch('views/src/**/*.html', ['html']);
-    gulp.watch('views/src/**/*.ejs', ['ejs']);
+    gulp.watch('views/src/html/**/*.html', ['html']);
+    gulp.watch('views/src/html/**/*.ejs', ['ejs']);
     gulp.watch('views/src/images/*', ['images']);
+});
+
+process.on('exit', function () {
+    if (nodeInstance) {
+        nodeInstance.kill();
+    }
 });
