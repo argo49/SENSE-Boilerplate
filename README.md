@@ -1,7 +1,7 @@
 
 # SENSE Boilerplate
 
-Make a Node application whenever the mood strikes, without any tedious setup!
+Make a Node application whenever the mood strikes, without any tedious setup! Now with GULP!
 
 ## What is SENSE?
 
