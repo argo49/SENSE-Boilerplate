@@ -25,6 +25,8 @@ This assumes you already have [Node.js](http://nodejs.org/) and [NPM](https://ww
 
 `init.bat`
 
+`npm install`
+
 `npm start`
 
 ### Mac/Linux
@@ -35,12 +37,14 @@ This assumes you already have [Node.js](http://nodejs.org/) and [NPM](https://ww
 
 `bash init.sh`
 
+`sudo npm install`
+
 `npm start`
 
 ## Notes
 
 - If you have any problems, please create an issue!
 - The sass folder structure is one I find myself using fairly often, feel free to tear it up and make your own structure!
-- This boilerplate also contains references to [normalize.css](https://necolas.github.io/normalize.css/) and Adam Kaplan's [grid](http://www.adamkaplan.me/grid/).
+- This boilerplate also contains references to [normalize.css](https://necolas.github.io/normalize.css/)
 - Special thanks to
   - robrighter's [node-boilerplate](https://github.com/robrighter/node-boilerplate/blob/master/initproject.sh) for giving me the scripting setup idea
