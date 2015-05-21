@@ -27,7 +27,7 @@ This assumes you already have [Node.js](http://nodejs.org/) and [NPM](https://ww
 
 `npm install`
 
-`npm start`
+`gulp`
 
 ### Mac/Linux
 
@@ -39,7 +39,7 @@ This assumes you already have [Node.js](http://nodejs.org/) and [NPM](https://ww
 
 `sudo npm install`
 
-`npm start`
+`gulp`
 
 ## Notes
 
