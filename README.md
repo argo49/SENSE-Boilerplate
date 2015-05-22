@@ -19,9 +19,9 @@ This assumes you already have [Node.js](http://nodejs.org/) and [NPM](https://ww
 
 ### Windows
 
-`git clone https://github.com/argo49/SENSE-Boilerplate`
+`git clone https://github.com/argo49/SENSE-Boilerplate.git:your_project_folder`
 
-`cd SENSE-Boilerplate`
+`cd your_project_folder`
 
 `init.bat`
 
@@ -31,9 +31,9 @@ This assumes you already have [Node.js](http://nodejs.org/) and [NPM](https://ww
 
 ### Mac/Linux
 
-`git clone https://github.com/argo49/SENSE-Boilerplate`
+`git clone https://github.com/argo49/SENSE-Boilerplate.git:your_project_folder`
 
-`cd SENSE-Boilerplate`
+`cd your_project_folder`
 
 `bash init.sh`
 

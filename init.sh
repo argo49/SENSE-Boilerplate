@@ -13,5 +13,5 @@ git add . -A
 git commit -m "Initial Commit"
 
 echo "Done. Now get coding!"
-echo "https://github.com/argo49/NESS-Boilerplate"
+echo "https://github.com/argo49/SENSE-Boilerplate"
 rm -- "$0"
