@@ -10,6 +10,7 @@ var minHtml    = require('gulp-minify-html');
 var imagemin   = require('gulp-imagemin');
 var nodemon    = require('gulp-nodemon');
 var pngquant   = require('imagemin-pngquant');
+var plumber    = require('gulp-plumber');
 
 gulp.task('default',
     ['server', 'sass', 'scripts', 'watch', 'html', 'ejs', 'images']);
@@ -18,6 +19,7 @@ gulp.task('default',
 gulp.task('sass', function() {
     return gulp.src('views/src/scss/**/*.scss')
         .pipe(sourcemaps.init())
+            .pipe(plumber())
             .pipe(sass())
             .pipe(prefix())
             .pipe(please())
