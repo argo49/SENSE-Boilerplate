@@ -8,7 +8,7 @@ var express = require('express'),
 app.set('port', process.env.PORT || 3000);
 app.set('node_modules', path.join(__dirname, 'node_modules'));
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views/dist')));
 
 // Routes
 app.get('/', routes.index);
