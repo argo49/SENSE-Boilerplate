@@ -11,12 +11,13 @@ var imagemin   = require('gulp-imagemin');
 var nodemon    = require('gulp-nodemon');
 var pngquant   = require('imagemin-pngquant');
 var plumber    = require('gulp-plumber');
+var del        = require('del');
 
 gulp.task('default',
-    ['server', 'sass', 'scripts', 'watch', 'html', 'ejs', 'images']);
+    ['clean', 'sass', 'scripts', 'watch', 'html', 'ejs', 'images', 'server']);
 
 // Compile scss
-gulp.task('sass', function() {
+gulp.task('sass', ['clean'], function() {
     return gulp.src('views/src/scss/**/*.scss')
         .pipe(sourcemaps.init())
             .pipe(plumber())
@@ -28,7 +29,7 @@ gulp.task('sass', function() {
 });
 
 // Concat and minify js
-gulp.task('scripts', function() {
+gulp.task('scripts', ['clean'], function() {
     return gulp.src('views/src/js/**/*.js')
         .pipe(concat('scripts.js'))
         .pipe(uglify())
@@ -36,8 +37,8 @@ gulp.task('scripts', function() {
 });
 
 // Image compression
-gulp.task('images', function () {
-    return gulp.src('src/images/*')
+gulp.task('images', ['clean'], function () {
+    return gulp.src('views/src/images/**')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -48,13 +49,13 @@ gulp.task('images', function () {
 
 // Pump ejs templates to the distribution folder
 // TODO: Figure out a way to minify generated templates
-gulp.task('ejs', function () {
+gulp.task('ejs', ['clean'], function () {
     return gulp.src('views/src/html/**/*.ejs')
         .pipe(gulp.dest('views/dist'));
 });
 
 // Minify HTML
-gulp.task('html', function () {
+gulp.task('html', ['clean'], function () {
     var options = {conditionals: true};
     return gulp.src('views/src/html/**/*.html')
         .pipe(minHtml(options))
@@ -62,7 +63,7 @@ gulp.task('html', function () {
 });
 
 // Start the node server
-gulp.task('server', function () {
+gulp.task('server', ['clean'], function () {
   nodemon({
     script: 'app.js',
     ext: 'js',
@@ -73,11 +74,16 @@ gulp.task('server', function () {
   });
 });
 
+// Clean the dist directory before gulping
+gulp.task('clean', function (cb) {
+  del(['views/dist/**/*'], cb);
+});
+
 // Watch things
-gulp.task('watch', function() {
+gulp.task('watch', ['clean'], function() {
     gulp.watch('views/src/scss/**/*.scss', ['sass']);
     gulp.watch('views/src/js/**/*.js', ['scripts']);
     gulp.watch('views/src/html/**/*.html', ['html']);
     gulp.watch('views/src/html/**/*.ejs', ['ejs']);
-    gulp.watch('views/src/images/*', ['images']);
+    gulp.watch('views/src/images/**', ['images']);
 });
