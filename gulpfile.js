@@ -13,11 +13,15 @@ var pngquant   = require('imagemin-pngquant');
 var plumber    = require('gulp-plumber');
 var del        = require('del');
 
-gulp.task('default',
-    ['clean', 'sass', 'scripts', 'watch', 'html', 'ejs', 'images', 'server']);
+gulp.task('default', ['build']);
+
+// Initial build
+gulp.task('build', ['clean'], function () {
+    gulp.run(['sass', 'scripts', 'watch', 'html', 'ejs', 'images', 'server']);
+});
 
 // Compile scss
-gulp.task('sass', ['clean'], function() {
+gulp.task('sass', function() {
     return gulp.src('views/src/scss/**/*.scss')
         .pipe(sourcemaps.init())
             .pipe(plumber())
@@ -29,15 +33,14 @@ gulp.task('sass', ['clean'], function() {
 });
 
 // Concat and minify js
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', function() {
     return gulp.src('views/src/js/**/*.js')
         .pipe(concat('scripts.js'))
         .pipe(uglify())
         .pipe(gulp.dest('views/dist/js'));
 });
-
 // Image compression
-gulp.task('images', ['clean'], function () {
+gulp.task('images', function () {
     return gulp.src('views/src/images/**')
         .pipe(imagemin({
             progressive: true,
@@ -49,13 +52,13 @@ gulp.task('images', ['clean'], function () {
 
 // Pump ejs templates to the distribution folder
 // TODO: Figure out a way to minify generated templates
-gulp.task('ejs', ['clean'], function () {
+gulp.task('ejs', function () {
     return gulp.src('views/src/html/**/*.ejs')
         .pipe(gulp.dest('views/dist'));
 });
 
 // Minify HTML
-gulp.task('html', ['clean'], function () {
+gulp.task('html', function () {
     var options = {conditionals: true};
     return gulp.src('views/src/html/**/*.html')
         .pipe(minHtml(options))
@@ -63,7 +66,7 @@ gulp.task('html', ['clean'], function () {
 });
 
 // Start the node server
-gulp.task('server', ['clean'], function () {
+gulp.task('server', function () {
   nodemon({
     script: 'app.js',
     ext: 'js',
@@ -80,7 +83,7 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch things
-gulp.task('watch', ['clean'], function() {
+gulp.task('watch', function() {
     gulp.watch('views/src/scss/**/*.scss', ['sass']);
     gulp.watch('views/src/js/**/*.js', ['scripts']);
     gulp.watch('views/src/html/**/*.html', ['html']);
